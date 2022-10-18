@@ -30,3 +30,4 @@ func InputUser2() int{
 	}
 	return input
 }
+

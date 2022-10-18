@@ -17,13 +17,13 @@ type Student struct{
 }
  
 //Set and get method for firstname and lastname
-func (s *Student) SetName(name string, name2 string)error{
+func (s *Student) SetName(first string, last string)error{
 	 //merged both firstname and lastname togther for simplicity 
-	if name == "" && name2 == ""{
+	if first == "" && last == ""{
 		return fmt.Errorf("error occured! you haven't entered a name") // setting an error message if user input no value
 	}
-	s.firstName = name2 // assigning firstname to name2 variable
-	s.lastname = name // assigning lastname to name variable
+	s.firstName = first // assigning firstname to name2 variable
+	s.lastname = last // assigning lastname to name variable
 	return nil
 }
 func (s *Student)Name1()string{

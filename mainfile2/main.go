@@ -14,7 +14,7 @@ func main(){
 	fmt.Print("Enter the number of Students to be registered: ")
     num, err := g.Student(g.InputUser2())
 	if err != nil{
-		log.Fatal("An error has occured: ", err)
+		log.Fatal("An error has occured: ", err)	
 	}
 	
 //created a hash map database to hold all informations
@@ -35,7 +35,7 @@ func main(){
 
 	// firstname and lastname
 	fmt.Print("Enter LastName: ")
-	err = value.SetName(g.InputUser(), name)
+	err = value.SetName(name, g.InputUser())
     if err != nil{
 		log.Fatal(err)
 	}
@@ -91,7 +91,7 @@ func main(){
 	fmt.Println("")
 
 	fmt.Println("Enter the details for another student.")
-
+    
 	registeredStudent[name] = value// each key equal a specofied value
 	// fmt.Println(name, registeredStudent[name])
 	if len(registeredStudent) == num{
@@ -101,7 +101,7 @@ func main(){
   
 
 
-	//Prints all the data 
+	//Prints all the data in a table format
 	var values student.Student                                                          
 	w := tabwriter.NewWriter(os.Stdout, 10, 0, 2, ' ', tabwriter.Debug)
 	fmt.Fprintln(w,"FirstName\tSurname\tGender\tDateOfBirth\tEmail\tDepartment\tMatric-No\t")
@@ -118,24 +118,30 @@ func main(){
 
 	//Enabling two deletion of student
 	fmt.Println("Would you like to delete a student name?")
-
 	fmt.Print("Please enter yes or no: ")
-	answer := g.InputUser()
 
-	var deleteName string
+	answer := g.InputUser() //user enters yes or no
+	fmt.Println("") 
+
+	var deleteName string // name of key to delete
 	
 	if answer == "yes"{
 	fmt.Print("Enter a Student name: ")
-	_, err = fmt.Scanln(&deleteName) 
-	if err!= nil{
-		log.Fatal(err)
+	deleteName = g.InputUser() // accept student name to delete details
+	_, ok := registeredStudent[deleteName] // check if student name is on the database
+
+	if !ok {
+		fmt.Println("")
+		fmt.Printf("%q is not in the database\n", deleteName)
+		fmt.Println("Please Enter a valid name")
+	}else {
+
+        delete(registeredStudent, deleteName) // if thestudent name is valid delete from the database
 	}
-	// registeredStudent[deleteName] = value
-	delete(registeredStudent, deleteName)
 	}else if answer == "no"{
 		fmt.Println("No data was deleted")
 	}else{
-		fmt.Println("Enter yes or no!")
+		fmt.Println("Invalid input! You're to enter yes or no!")
 	}
 
 
@@ -146,18 +152,23 @@ func main(){
 	
     fmt.Println("Do you want to delete another data?")
 	fmt.Print("Please enter yes or no: ")
-    answer2 := g.InputUser()
+    answer2 := g.InputUser() // accaept yes or no to delete a another key
 	var deleteName2 string
 	if answer2 == "yes"{
 		fmt.Print("Enter a Student name: ")
-		_, err = fmt.Scanln(&deleteName2) 
-		if err!= nil{
-			log.Fatal(err)
-		}
-		// registeredStudent[deleteName2] = value
+		deleteName2 = g.InputUser()
+		_, ok := registeredStudent[deleteName2]
+	if !ok {
+		fmt.Println("")
+		fmt.Printf("%q is not in the database\n", deleteName2)
+		fmt.Println("Please Enter a valid name")
+	}else {
 		delete(registeredStudent, deleteName2)
+	}
 	}else if answer2 == "no"{
 		fmt.Println("No data was deleted")
+	}else {
+		fmt.Println("Invalid input! You're to enter yes or no!")
 	}
 
 	w = tabwriter.NewWriter(os.Stdout, 10, 0, 2, ' ', tabwriter.Debug)
