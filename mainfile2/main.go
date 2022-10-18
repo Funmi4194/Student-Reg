@@ -102,20 +102,14 @@ func main(){
 
 
 	//Prints all the data 
-	var values student.Student
-	// for _, values = range registeredStudent{
-	// 	fmt.Println(values.Name1(), values.Name(), values.Gender(), values.Date, values.Email(), values.Dept(), values.RegNo())
-	// }
-    //println in a table format
+	var values student.Student                                                          
 	w := tabwriter.NewWriter(os.Stdout, 10, 0, 2, ' ', tabwriter.Debug)
 	fmt.Fprintln(w,"FirstName\tSurname\tGender\tDateOfBirth\tEmail\tDepartment\tMatric-No\t")
 	for _, values = range registeredStudent{
-		fmt.Fprint(w, values.Name1(), "\t", values.Name(), "\t", values.Gender(), "\t", values.Date, "\t", values.Email(), "\t", values.Dept(), "\t", values.RegNo(), "\t")
-	// fmt.Print("\n")
-	}
-	
+		fmt.Fprint(w, values.Name1(), "\t", values.Name(), "\t", values.Gender(), "\t", values.Date, "\t", values.Email(), "\t", values.Dept(), "\t", values.RegNo(), "\t", "\n")
 
-	w.Flush()
+	}
+	w.Flush() 
 
 	fmt.Println("")
 
@@ -167,16 +161,14 @@ func main(){
 	}
 
 	w = tabwriter.NewWriter(os.Stdout, 10, 0, 2, ' ', tabwriter.Debug)
-	fmt.Fprintln(w,"FirstName\tSurname\tGender\tDateOfBirth\tEmail\tDepartment\tMatric-No")
+	fmt.Fprintln(w,"FirstName\tSurname\tGender\tDateOfBirth\tEmail\tDepartment\tMatric-No\t")
 	for _, values = range registeredStudent{
-	fmt.Fprint(w, values.Name1(), "\t", values.Name(), "\t", values.Gender(), "\t", values.Date, "\t", values.Email(), "\t", values.Dept(), "\t", values.RegNo())
+	fmt.Fprint(w, values.Name1(), "\t", values.Name(), "\t", values.Gender(), "\t", values.Date, "\t", values.Email(), "\t", values.Dept(), "\t", values.RegNo(), "\t", "\n")
 	}
 
 	w.Flush()
 	fmt.Println("")
-	// for _, values = range registeredStudent{
-	// 	fmt.Println(values.Name1(), values.Name(), values.Gender(), values.Date, values.Email(), values.Dept(), values.RegNo())
-	// }
+	
 
 	fmt.Println("Exit")
 
